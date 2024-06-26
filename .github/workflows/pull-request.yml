@@ -1,0 +1,28 @@
+name: Pull request workflow
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+      - name: Installing pnpm
+        run: npm install pnpm -g
+      - name: Installing dependencies
+        run: pnpm install
+      
+      - name: Building project...
+        run: pnpm run build
+
+      - name: Runing tests
+        run: pnpm run test
