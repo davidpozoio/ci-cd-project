@@ -17,7 +17,9 @@ describe("GET /form-schemes", () => {
     formSchemeRepositoryMock.findAll.mockImplementation(async () => [
       formSchemeMock,
     ]);
-    const response = await request(app).get(`${ENV.API_PREFIX}/form-schemes`);
+    const response = await request(app)
+      .get(`${ENV.API_PREFIX}/form-schemes`)
+      .catch((err) => err);
     expect(response.statusCode).toBe(200);
     expect(response.body.formSchemes).not.toBeUndefined();
     expect(response.body.formSchemes?.[0]?.id).toBe(formSchemeMock.id);
@@ -29,10 +31,10 @@ describe("GET /form-schemes", () => {
     formSchemeRepositoryMock.findById.mockImplementation(
       async () => formSchemeMock
     );
-    const response = await request(app).get(
-      `${ENV.API_PREFIX}/form-schemes/${crypto.randomUUID()}`
-    );
-    console.log(response.body);
+    const response = await request(app)
+      .get(`${ENV.API_PREFIX}/form-schemes/${crypto.randomUUID()}`)
+      .catch((err) => err);
+
     expect(response.statusCode).toBe(200);
     expect(response.body.formScheme.id).toBe(formSchemeMock.id);
     expect(response.body.formScheme.label).toBe(formSchemeMock.label);

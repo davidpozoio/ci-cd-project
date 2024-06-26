@@ -1,0 +1,11 @@
+name: Cron example
+on:
+  schedule:
+    - cron: "0/1 * * * ?"
+  workflow_dispatch:
+jobs:
+  cron-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print hello
+        run: echo Hello
