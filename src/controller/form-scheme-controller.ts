@@ -4,6 +4,7 @@ import asyncErrorHandler from "../utils/async-error-handler";
 class FormSchemeController {
   findAll = asyncErrorHandler(async (req, res) => {
     const formSchemes = await formSchemeService.findAll();
+    throw new Error("error");
     res.status(200).json({
       formSchemes,
     });
