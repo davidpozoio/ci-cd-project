@@ -42,7 +42,10 @@ describe("GET /form-schemes", () => {
     formSchemeRepositoryMock.findById.mockImplementation(
       async () => formSchemeMock
     );
-    const response = await request(app).get(`${ENV.API_PREFIX}/form-schemes/1`);
+    const response = await request(app)
+      .get(`${ENV.API_PREFIX}/form-schemes/1`)
+      .catch((err) => err);
+
     expect(response.statusCode).toBe(400);
     expect(response.body.code).toBe(ErrorsIdentifier.InvalidUUID);
   });
@@ -50,9 +53,9 @@ describe("GET /form-schemes", () => {
   test("should return not found formScheme error", async () => {
     formSchemeRepositoryMock.findById.mockImplementation(async () => undefined);
 
-    const response = await request(app).get(
-      `${ENV.API_PREFIX}/form-schemes/${crypto.randomUUID()}`
-    );
+    const response = await request(app)
+      .get(`${ENV.API_PREFIX}/form-schemes/${crypto.randomUUID()}`)
+      .catch((err) => err);
     expect(response.statusCode).toBe(404);
     expect(response.body.code).toBe(ErrorsIdentifier.NotFound);
   });

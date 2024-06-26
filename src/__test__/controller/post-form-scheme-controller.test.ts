@@ -10,7 +10,9 @@ describe("POST /form-schemes", () => {
       async (formScheme) => formScheme
     );
 
-    const response = await request(app).post(`${ENV.API_PREFIX}/form-schemes`);
+    const response = await request(app)
+      .post(`${ENV.API_PREFIX}/form-schemes`)
+      .catch((err) => err);
 
     expect(response.statusCode).toBe(400);
     expect(response.body.errors).not.toBeUndefined();
@@ -23,7 +25,8 @@ describe("POST /form-schemes", () => {
 
     const response = await request(app)
       .post(`${ENV.API_PREFIX}/form-schemes`)
-      .send({ label: "uno" });
+      .send({ label: "uno" })
+      .catch((err) => err);
     expect(response.statusCode).toBe(200);
     expect(response.body.formScheme.label).toBe("uno");
   });

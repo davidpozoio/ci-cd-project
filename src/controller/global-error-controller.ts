@@ -8,7 +8,6 @@ const globalErrorController = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(err);
   if (Array.isArray((err as any)?.errors)) {
     res.status(400).json({
       errors: err,
@@ -34,7 +33,7 @@ const globalErrorController = async (
     return;
   }
 
-  res.status(200).json({
+  res.status(500).json({
     error: err,
   });
 };
