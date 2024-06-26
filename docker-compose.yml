@@ -1,0 +1,19 @@
+version: "v1.0.0"
+networks:
+  net-form:
+services:
+  backend:
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./src:/home/app/src
+    networks:
+      - net-form
+    depends_on:
+      - database
+  database:
+    image: postgres
+    networks:
+      - net-form
+    env_file: ".env"
