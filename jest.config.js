@@ -3,4 +3,5 @@ export default {
   preset: "ts-jest",
   testEnvironment: "node",
   moduleDirectories: ["node_modules", "src", "__test__/__mocks__"],
+  testPathIgnorePatterns: ["node_modules", "dist"],
 };
