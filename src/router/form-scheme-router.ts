@@ -1,12 +1,22 @@
 import { Router } from "express";
 import formSchemeController from "../controller/form-scheme-controller";
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
 import InvalidUUID from "../errors/invalid-uuid-exception";
 import customErrorValidator from "../utils/add-custom-error-validator";
 
 const formSchemeRouter = Router();
 
-formSchemeRouter.route("/").get(formSchemeController.findAll);
+formSchemeRouter
+  .route("/")
+  .get(
+    [
+      query("label")
+        .optional()
+        .isString()
+        .withMessage("label must be of type string"),
+    ],
+    formSchemeController.findAll
+  );
 formSchemeRouter
   .route("/:id")
   .get(

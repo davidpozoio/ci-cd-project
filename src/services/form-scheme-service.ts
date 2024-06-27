@@ -1,6 +1,7 @@
 import NotFound from "../errors/not-found-exception";
 import FormSchemeRepository from "../respository/form-scheme/form-scheme-repository";
 import SequelizeFormSchemeRepository from "../respository/form-scheme/sequelize-form-scheme-repository";
+import { Where } from "../respository/respository";
 import { FormScheme } from "../types/form-scheme";
 
 export class FormSchemeService extends FormSchemeRepository {
@@ -8,9 +9,7 @@ export class FormSchemeService extends FormSchemeRepository {
     super();
   }
 
-  async findAll(
-    where?: Partial<FormScheme> | undefined
-  ): Promise<FormScheme[]> {
+  async findAll(where?: Where<FormScheme> | undefined): Promise<FormScheme[]> {
     return this.formSchemeRepository.findAll(where);
   }
 
